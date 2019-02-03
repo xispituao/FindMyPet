@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FindMyPet</string>
+    <string name="imagem_do_animal">Imagem do animal</string>
 </resources>
