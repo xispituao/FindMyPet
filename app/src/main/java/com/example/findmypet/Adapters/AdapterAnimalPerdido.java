@@ -1,39 +1,64 @@
 package com.example.findmypet.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.findmypet.DetalheAnimal;
+import com.example.findmypet.MainActivity;
 import com.example.findmypet.Models.Animal;
 import com.example.findmypet.R;
 
+import java.time.Instant;
 import java.util.List;
 
 public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerdido.AnimalViewHolder> {
     private Animal[] animais;
+    private Context mContext;
 
-    public AdapterAnimalPerdido(Animal[] animais){
+    public AdapterAnimalPerdido(Context context, Animal[] animais){
+        this.mContext = context;
         this.animais = animais;
     }
 
     @NonNull
     @Override
     public AnimalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_card_view , viewGroup, false);
         AnimalViewHolder pvh = new AnimalViewHolder(v);
         return pvh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int i) {
-        animalViewHolder.animalEspecie.setText(animais[i].getEspecie());
-        animalViewHolder.animalCor.setText(animais[i].getCor());
-        animalViewHolder.animalRaca.setText(animais[i].getRaca());
+        final Animal animal = animais[i];
+        animalViewHolder.animalNome.setText(animal.getEspecie());
+        animalViewHolder.animalCor.setText(animal.getCor());
+        animalViewHolder.animalRaca.setText(animal.getRaca());
+        animalViewHolder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,DetalheAnimal.class);
+                //intent.putExtra("Imagem", animal.getFoto());
+                intent.putExtra("Nome", animal.getNome());
+                intent.putExtra("Especie", animal.getEspecie());
+                intent.putExtra("Raca", animal.getRaca());
+                intent.putExtra("Cor", animal.getCor());
+                intent.putExtra("Descricao", animal.getDescricao());
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -47,18 +72,24 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
     }
 
 
+
     public static class AnimalViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
-        TextView animalEspecie;
+        TextView animalNome;
         TextView animalRaca;
         TextView animalCor;
+        LinearLayout layout;
 
         AnimalViewHolder(View itemView){
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cardview);
-            animalEspecie = (TextView) itemView.findViewById((R.id.especie));
+            animalNome = (TextView) itemView.findViewById((R.id.nome));
             animalCor = (TextView) itemView.findViewById(R.id.cor);
             animalRaca = (TextView) itemView.findViewById(R.id.raca);
+            layout = (LinearLayout) itemView.findViewById(R.id.layout);
         }
+
+
     }
+
 }

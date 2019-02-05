@@ -13,9 +13,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerview;
-    Animal[] animais = {new Animal("Cachorro", "Preta", "Labrador"),
-            new Animal("Gato", "Preta", "Siames"),new Animal("Gato", "Branca", "Siames")
-    ,new Animal("Gato", "Preta", "Seila")};
+    Animal[] animais = {new Animal("rex","Cachorro", "Preta", "Labrador","Perdi ontem a noite"),
+            new Animal("garfield","Gato", "Preta", "Siames","Sumiu simplesmente"),new Animal("Pitu","Gato", "Branca", "Siames","Nao seiiii")
+    ,new Animal("Bob","Gato", "Preta", "Seila","correu atras de um inseto e desapareceu")};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager linearlayout = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(linearlayout);
-        AdapterAnimalPerdido adapter = new AdapterAnimalPerdido(animais);
+        AdapterAnimalPerdido adapter = new AdapterAnimalPerdido(this, animais);
         recyclerview.setAdapter(adapter);
 
     }
