@@ -42,10 +42,10 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int i) {
         final Animal animal = animais[i];
-        animalViewHolder.animalNome.setText(animal.getEspecie());
+        animalViewHolder.animalNome.setText(animal.getNome());
         animalViewHolder.animalCor.setText(animal.getCor());
         animalViewHolder.animalRaca.setText(animal.getRaca());
-        animalViewHolder.layout.setOnClickListener(new View.OnClickListener() {
+        /*animalViewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,DetalheAnimal.class);
@@ -57,7 +57,7 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
                 intent.putExtra("Descricao", animal.getDescricao());
                 mContext.startActivity(intent);
             }
-        });
+        });*/
 
     }
 
@@ -66,19 +66,15 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
         return animais.length;
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
 
 
 
-    public static class AnimalViewHolder extends RecyclerView.ViewHolder{
+
+    public class AnimalViewHolder extends RecyclerView.ViewHolder{
         CardView cv;
         TextView animalNome;
         TextView animalRaca;
         TextView animalCor;
-        LinearLayout layout;
 
         AnimalViewHolder(View itemView){
             super(itemView);
@@ -86,10 +82,28 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
             animalNome = (TextView) itemView.findViewById((R.id.nome));
             animalCor = (TextView) itemView.findViewById(R.id.cor);
             animalRaca = (TextView) itemView.findViewById(R.id.raca);
-            layout = (LinearLayout) itemView.findViewById(R.id.layout);
+            clicarCard(itemView);
+
         }
 
+        private void clicarCard(View view){
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final int posicao = getAdapterPosition();
+                    Animal animal = animais[posicao];
+                    Intent intent = new Intent(mContext,DetalheAnimal.class);
+                    //intent.putExtra("Imagem", animal.getFoto());
+                    intent.putExtra("Nome", animal.getNome());
+                    intent.putExtra("Especie", animal.getEspecie());
+                    intent.putExtra("Raca", animal.getRaca());
+                    intent.putExtra("Cor", animal.getCor());
+                    intent.putExtra("Descricao", animal.getDescricao());
+                    mContext.startActivity(intent);
+                }
+            });
 
+        }
     }
 
 }
