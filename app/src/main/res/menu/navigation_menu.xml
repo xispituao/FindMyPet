@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/teste"
+        android:title="Teste"
+        android:icon="@drawable/ic_person_black_24dp" />
+
+    <item
+        android:id="@+id/teste2"
+        android:title="Teste2"
+        android:icon="@drawable/ic_format_align_justify_black_24dp" />
+
+    <item
+        android:id="@+id/teste3"
+        android:title="Teste3"
+        android:icon="@drawable/ic_forum_black_24dp" />
+
+</menu>
