@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:layout_height="180dp"
+    android:background="@drawable/gato_e_cachorro"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     >
 
-    <ImageView
-        android:id="@+id/imagemView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:src="@mipmap/ic_launcher"
-        android:contentDescription="Imagem" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
-        android:text="Android teste"
+        android:text="Usuario"
+        android:textSize="25sp"
         android:textColor="#000000"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 

@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/teste"
-        android:title="Teste"
+        android:title="Perfil"
         android:icon="@drawable/ic_person_black_24dp" />
 
     <item
         android:id="@+id/teste2"
-        android:title="Teste2"
+        android:title="Criar novo post"
         android:icon="@drawable/ic_format_align_justify_black_24dp" />
 
     <item

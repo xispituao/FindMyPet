@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".DetalheAnimal"></activity>
+        <activity android:name=".FormularioPost"></activity>
+        <activity android:name=".DetalheAnimal" />
         <activity android:name=".CardView" />
         <activity
             android:name=".TelaAbertura"
