@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.findmypet.Formularios.Login;
+
 public class TelaAbertura extends AppCompatActivity {
 
     @Override
@@ -22,7 +24,7 @@ public class TelaAbertura extends AppCompatActivity {
 
     private void mostrarHome() {
         Intent intent = new Intent(this,
-                MainActivity.class);
+                Login.class);
         startActivity(intent);
         finish();
     }

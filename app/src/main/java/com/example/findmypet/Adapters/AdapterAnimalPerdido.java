@@ -2,25 +2,17 @@ package com.example.findmypet.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.findmypet.DetalheAnimal;
-import com.example.findmypet.MainActivity;
-import com.example.findmypet.Models.Animal;
+import com.example.findmypet.Modelos.Animal;
 import com.example.findmypet.R;
-
-import java.time.Instant;
-import java.util.List;
 
 public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerdido.AnimalViewHolder> {
     private Animal[] animais;

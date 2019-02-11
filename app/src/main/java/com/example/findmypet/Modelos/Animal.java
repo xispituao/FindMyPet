@@ -1,4 +1,4 @@
-package com.example.findmypet.Models;
+package com.example.findmypet.Modelos;
 
 
 public class Animal {
@@ -7,6 +7,7 @@ public class Animal {
     private String especie;
     private String cor;
     private String raca;
+    private String sexo;
     private String descricao;
 
     //Nao esquece de colocar int foto dentro dos paramentros novamente
@@ -17,6 +18,7 @@ public class Animal {
         this.cor = cor;
         this.raca = raca;
         this.descricao = descricao;
+        //this.sexo = sexo;
     }
 
 
