@@ -7,11 +7,8 @@ public class Usuario {
     private String sexo;
     private static Usuario usuarioLogado;
 
-    public Usuario(String nome, String email, String senha, String sexo) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.sexo = sexo;
+    public Usuario() {
+
     }
 
     public String getNome() {

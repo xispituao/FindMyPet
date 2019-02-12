@@ -35,7 +35,7 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
     public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int i) {
         final Animal animal = animais[i];
         animalViewHolder.animalNome.setText(animal.getNome());
-        animalViewHolder.animalCor.setText(animal.getCor());
+        animalViewHolder.animalCor.setText(animal.getCor_pelo());
         animalViewHolder.animalRaca.setText(animal.getRaca());
         /*animalViewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +89,8 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
                     intent.putExtra("Nome", animal.getNome());
                     intent.putExtra("Especie", animal.getEspecie());
                     intent.putExtra("Raca", animal.getRaca());
-                    intent.putExtra("Cor", animal.getCor());
-                    intent.putExtra("Descricao", animal.getDescricao());
+                    intent.putExtra("Cor", animal.getCor_pelo());
+                    intent.putExtra("Descricao", animal.getCaracteristicasAdicionais());
                     mContext.startActivity(intent);
                 }
             });

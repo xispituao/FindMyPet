@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:hint="Senha"
         android:textSize="20sp"
+        android:inputType="textPassword"
         android:paddingTop="16dp"/>
 
     <Button

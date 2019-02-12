@@ -34,7 +34,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/animal_photo"
                 android:layout_toRightOf="@+id/animal_photo"
-                android:text="AAAAAAAAAAAAAA"
+                android:text="Nome"
                 android:textSize="30sp" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:layout_below="@+id/nome"
                 android:layout_toEndOf="@+id/animal_photo"
                 android:layout_toRightOf="@+id/animal_photo"
-                android:text="BBBBBBBBBBBBBBBBB" />
+                android:text="Raca" />
 
             <TextView
                 android:id="@+id/cor"
@@ -53,7 +53,7 @@
                 android:layout_below="@+id/raca"
                 android:layout_toEndOf="@+id/animal_photo"
                 android:layout_toRightOf="@+id/animal_photo"
-                android:text="CCCCCCCCCC" />
+                android:text="Cor" />
 
 
         </RelativeLayout>

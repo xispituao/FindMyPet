@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="230dp"
     android:background="@drawable/gato_e_cachorro"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     >
+
+    <ImageView
+        android:id="@+id/imagemView"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="Imagem"
+        android:paddingTop="16dp"
+        android:src="@drawable/cao_e_gato" />
 
 
     <TextView
@@ -27,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:text="nataso.s11@gmail.com"/>
+        android:text="fulano@gmail.com"/>
 
 
 </LinearLayout>

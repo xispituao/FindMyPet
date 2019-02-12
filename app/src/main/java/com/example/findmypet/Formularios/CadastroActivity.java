@@ -1,4 +1,4 @@
-package com.example.findmypet;
+package com.example.findmypet.Formularios;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.findmypet.DAO.ConfiguracaoFirebase;
 import com.example.findmypet.Modelos.Usuario;
+import com.example.findmypet.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,8 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -39,7 +38,7 @@ public class CadastroActivity extends AppCompatActivity {
     private FirebaseFirestore bd;
     private FirebaseAuth autenticacao;
 
-    private static final String TAG = "DocSnippets";
+    private static final String TAG = "CADASTRO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +59,21 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(edtCadSenha.getText().toString().equals(edtCadConfirmaSenha.getText().toString())) {
-                    String nome = edtCadNome.getText().toString();
-                    String email = edtCadEmail.getText().toString();
-                    String senha = edtCadSenha.getText().toString();
-                    String sexo;
+                    final String nome = edtCadNome.getText().toString();
+                    final String email = edtCadEmail.getText().toString();
+                    final String senha = edtCadSenha.getText().toString();
+                    final String sexo;
                     if (rbFeminino.isChecked()) {
                        sexo = "feminino";
                     } else {
                         sexo = "masculino";;
                     }
 
-                    final Usuario usuario = new Usuario(nome, email, senha, sexo);
+                    final Usuario usuario = new Usuario();
+                    usuario.setNome(nome);
+                    usuario.setEmail(email);
+                    usuario.setSenha(senha);
+                    usuario.setSexo(sexo);
 
                     autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
                     autenticacao.createUserWithEmailAndPassword(
@@ -82,26 +85,27 @@ public class CadastroActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(CadastroActivity.this, "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
                                 Map<String, Object> newusuario = new HashMap<>();
-                                newusuario.put("email", edtCadEmail.getText().toString());
-                                newusuario.put("nome", edtCadNome.getText().toString());
-                                newusuario.put("senha", edtCadSenha.getText().toString());
+                                newusuario.put("email", email);
+                                newusuario.put("nome", nome);
+                                newusuario.put("senha", senha);
+                                newusuario.put("sexo", sexo);
 
                                 Usuario.logar(usuario);
 
-                                bd.collection("usuarios")
-                                        .add(newusuario)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                bd.collection("usuarios").document(email)
+                                        .set(newusuario)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
-                                            public void onSuccess(DocumentReference documentReference) {
-                                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "Cadastro com sucesso");
                                             }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w(TAG, "Error adding document", e);
-                                            }
-                                        });
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "ERRO no cadastro!");
+                                    }
+                                });
+                                finish();
                             } else {
                                 String erroExcecao = "";
 

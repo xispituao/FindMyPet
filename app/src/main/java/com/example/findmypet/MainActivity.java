@@ -1,5 +1,6 @@
 package com.example.findmypet;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.findmypet.Adapters.AdapterAnimalPerdido;
 import com.example.findmypet.DAO.ConfiguracaoFirebase;
+import com.example.findmypet.Formularios.FormularioPost;
 import com.example.findmypet.Modelos.Animal;
 import com.example.findmypet.Modelos.Usuario;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,9 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private FirebaseUser usuarioLogado;
 
-    Animal[] animais = {new Animal("rex","Cachorro", "Preta", "Labrador","Perdi ontem a noite"),
-            new Animal("garfield","Gato", "Preta", "Siames","Sumiu simplesmente"),new Animal("Pitu","Gato", "Branca", "Siames","Nao seiiii")
-    ,new Animal("Bob","Gato", "Preta", "Seila","correu atras de um inseto e desapareceu")};
+    Animal[] animais = {new Animal("urlfototeste","Rex","Cachorro", "Preta", "Labrador",
+            "Perdi ontem a noite","Tem uma pintinha preta no pescoco")};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
-                if(id == R.id.teste){
+                if(id == R.id.perfil){
                     Toast.makeText(MainActivity.this, "TESTE!",Toast.LENGTH_SHORT).show();
-                }else if(id == R.id.teste2){
-                    Toast.makeText(MainActivity.this, "TESTE2!",Toast.LENGTH_SHORT).show();
+                }else if(id == R.id.criarPublicao){
+                    abrirTelaDeFormularioDePublicacao();
                 } else if(id == R.id.teste3){
                     Toast.makeText(MainActivity.this, "TESTE3!",Toast.LENGTH_SHORT).show();
                 }
@@ -86,5 +87,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void abrirTelaDeFormularioDePublicacao(){
+        Intent intent = new Intent(MainActivity.this, FormularioPost.class);
+        startActivity(intent);
     }
 }

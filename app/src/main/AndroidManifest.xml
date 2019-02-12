@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.findmypet">
 
+    <uses-feature android:name="android.hardware.CAMERA" android:required="false" />
+    <uses-permission android:name="android.hardware.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,11 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".CadastroActivity"></activity>
-        <activity android:name=".Formularios.Login" />
-        <activity android:name=".Formularios.FormularioPost" />
+        <activity android:name=".PerfilActivity"/>
+        <activity android:name=".Formularios.CadastroActivity" />
+        <activity android:name=".Formularios.Login"
+            tools:ignore="InnerclassSeparator" />
+        <activity android:name=".Formularios.FormularioPost"
+            tools:ignore="InnerclassSeparator" />
         <activity android:name=".DetalheAnimal" />
-        <activity android:name=".CardView" />
         <activity
             android:name=".TelaAbertura"
             android:theme="@style/Theme.AppCompat.NoActionBar">
