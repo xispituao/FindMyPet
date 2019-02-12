@@ -19,16 +19,26 @@ import com.example.findmypet.Adapters.AdapterAnimalPerdido;
 import com.example.findmypet.DAO.ConfiguracaoFirebase;
 import com.example.findmypet.Formularios.FormularioPost;
 import com.example.findmypet.Modelos.Animal;
+import com.example.findmypet.Modelos.Publicacao;
 import com.example.findmypet.Modelos.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private FirebaseUser usuarioLogado;
+    private ArrayList<Publicacao> publicacoes = new ArrayList<>();
 
-    Animal[] animais = {new Animal("urlfototeste","Rex","Cachorro", "Preta", "Labrador",
-            "Perdi ontem a noite","Tem uma pintinha preta no pescoco")};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 if(id == R.id.perfil){
-                    Toast.makeText(MainActivity.this, "TESTE!",Toast.LENGTH_SHORT).show();
+                    abrirTelaDePerfil();
                 }else if(id == R.id.criarPublicao){
                     abrirTelaDeFormularioDePublicacao();
                 } else if(id == R.id.teste3){
@@ -68,13 +78,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        pegarNoBdPublicacoes();
 
         RecyclerView recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerview.setHasFixedSize(true);
 
         LinearLayoutManager linearlayout = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(linearlayout);
-        AdapterAnimalPerdido adapter = new AdapterAnimalPerdido(this, animais);
+        AdapterAnimalPerdido adapter = new AdapterAnimalPerdido(this, publicacoes);
         recyclerview.setAdapter(adapter);
 
     }
@@ -93,4 +104,28 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, FormularioPost.class);
         startActivity(intent);
     }
+    private void abrirTelaDePerfil(){
+        Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
+        startActivity(intent);
+    }
+
+    public void pegarNoBdPublicacoes() {
+        CollectionReference publicacoesReferencia = ConfiguracaoFirebase.BancoDeDados().collection("publicacoes");
+        publicacoesReferencia.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Publicacao publicacao = document.toObject(Publicacao.class);
+                        publicacoes.add(publicacao);
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "ERRO AO PUXAR OS DADOS DO BD PUBLICACOES", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
+
 }

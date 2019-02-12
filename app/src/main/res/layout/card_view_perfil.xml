@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/animal_photo"
+                android:layout_width="118dp"
+                android:layout_height="134dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:contentDescription="Imagem Animal"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/animal_photo"
+                android:layout_toRightOf="@+id/animal_photo"
+                android:text="Nome"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/raca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nome"
+                android:layout_toEndOf="@+id/animal_photo"
+                android:layout_toRightOf="@+id/animal_photo"
+                android:text="Raca" />
+
+            <TextView
+                android:id="@+id/cor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/raca"
+                android:layout_toEndOf="@+id/animal_photo"
+                android:layout_toRightOf="@+id/animal_photo"
+                android:text="Cor" />
+
+            <Button
+                android:id="@+id/editarpublicao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cor"
+                android:layout_toEndOf="@+id/animal_photo"
+                android:layout_toRightOf="@+id/animal_photo"
+                android:background="#0000FF"
+                android:text="Editar" />
+
+            <Button
+                android:id="@+id/apagarpublicacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/cor"
+                android:layout_toEndOf="@+id/editarpublicao"
+                android:layout_toRightOf="@+id/editarpublicao"
+                android:background="#FF0000"
+                android:text="Apagar" />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

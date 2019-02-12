@@ -5,10 +5,31 @@ public class Usuario {
     private String email;
     private String senha;
     private String sexo;
+    private String telefone;
     private static Usuario usuarioLogado;
 
     public Usuario() {
 
+    }
+
+    public Usuario(String nome, String email, String senha, String sexo, String telefone) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.sexo = sexo;
+        this.telefone = telefone;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public static Usuario getUsuarioLogado() {
+        return usuarioLogado;
     }
 
     public String getNome() {

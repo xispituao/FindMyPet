@@ -8,19 +8,33 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.findmypet.DAO.ConfiguracaoFirebase;
 import com.example.findmypet.DetalheAnimal;
 import com.example.findmypet.Modelos.Animal;
+import com.example.findmypet.Modelos.Publicacao;
 import com.example.findmypet.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerdido.AnimalViewHolder> {
-    private Animal[] animais;
+    private ArrayList<Publicacao> publicacoesDados;
     private Context mContext;
 
-    public AdapterAnimalPerdido(Context context, Animal[] animais){
+    public AdapterAnimalPerdido(Context context, ArrayList<Publicacao> publicacoes){
         this.mContext = context;
-        this.animais = animais;
+        this.publicacoesDados = publicacoes;
     }
 
     @NonNull
@@ -33,29 +47,21 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int i) {
-        final Animal animal = animais[i];
+        final Animal animal = publicacoesDados.get(i).getAnimal();
         animalViewHolder.animalNome.setText(animal.getNome());
         animalViewHolder.animalCor.setText(animal.getCor_pelo());
         animalViewHolder.animalRaca.setText(animal.getRaca());
-        /*animalViewHolder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext,DetalheAnimal.class);
-                //intent.putExtra("Imagem", animal.getFoto());
-                intent.putExtra("Nome", animal.getNome());
-                intent.putExtra("Especie", animal.getEspecie());
-                intent.putExtra("Raca", animal.getRaca());
-                intent.putExtra("Cor", animal.getCor());
-                intent.putExtra("Descricao", animal.getDescricao());
-                mContext.startActivity(intent);
-            }
-        });*/
+        if(animal.getEspecie().equals("Cachorro")){
+            animalViewHolder.foto.setImageResource(R.drawable.dog);
+        }else if(animal.getEspecie().equals("Gato")){
+            animalViewHolder.foto.setImageResource(R.drawable.gato);
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return animais.length;
+        return publicacoesDados.size();
     }
 
 
@@ -67,6 +73,7 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
         TextView animalNome;
         TextView animalRaca;
         TextView animalCor;
+        ImageView foto;
 
         AnimalViewHolder(View itemView){
             super(itemView);
@@ -74,6 +81,7 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
             animalNome = (TextView) itemView.findViewById((R.id.nome));
             animalCor = (TextView) itemView.findViewById(R.id.cor);
             animalRaca = (TextView) itemView.findViewById(R.id.raca);
+            foto =(ImageView) itemView.findViewById(R.id.animal_photo);
             clicarCard(itemView);
 
         }
@@ -83,19 +91,23 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
                 @Override
                 public void onClick(View v) {
                     final int posicao = getAdapterPosition();
-                    Animal animal = animais[posicao];
+                    Publicacao publicacao = publicacoesDados.get(posicao);
                     Intent intent = new Intent(mContext,DetalheAnimal.class);
                     //intent.putExtra("Imagem", animal.getFoto());
-                    intent.putExtra("Nome", animal.getNome());
-                    intent.putExtra("Especie", animal.getEspecie());
-                    intent.putExtra("Raca", animal.getRaca());
-                    intent.putExtra("Cor", animal.getCor_pelo());
-                    intent.putExtra("Descricao", animal.getCaracteristicasAdicionais());
+                    intent.putExtra("Nome", publicacao.getAnimal().getNome());
+                    intent.putExtra("Especie", publicacao.getAnimal().getEspecie());
+                    intent.putExtra("Raca", publicacao.getAnimal().getRaca());
+                    intent.putExtra("Cor", publicacao.getAnimal().getCor_pelo());
+                    intent.putExtra("Descricao", publicacao.getAnimal().getCaracteristicasAdicionais());
+                    intent.putExtra("Nome_usuario", publicacao.getUsuario().getNome());
+                    intent.putExtra("Email", publicacao.getUsuario().getEmail());
                     mContext.startActivity(intent);
                 }
             });
 
         }
     }
+
+
 
 }

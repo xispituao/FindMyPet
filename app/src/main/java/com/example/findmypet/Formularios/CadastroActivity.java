@@ -11,6 +11,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.findmypet.DAO.ConfiguracaoFirebase;
+import com.example.findmypet.MainActivity;
+import com.example.findmypet.Modelos.Publicacao;
 import com.example.findmypet.Modelos.Usuario;
 import com.example.findmypet.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,9 +24,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -35,8 +43,11 @@ public class CadastroActivity extends AppCompatActivity {
     private RadioButton rbMasculino;
     private RadioButton rbFeminino;
     private Button btnCadastrar;
+    private EditText edttelefone;
     private FirebaseFirestore bd;
     private FirebaseAuth autenticacao;
+
+    private List<Publicacao> publicacoesDados = new ArrayList<>();
 
     private static final String TAG = "CADASTRO";
 
@@ -54,19 +65,21 @@ public class CadastroActivity extends AppCompatActivity {
         rbFeminino = (RadioButton) findViewById(R.id.rbFeminino);
         rbMasculino = (RadioButton) findViewById(R.id.rbMasculino);
         btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        edttelefone = (EditText)findViewById(R.id.edtTelefone);
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(edtCadSenha.getText().toString().equals(edtCadConfirmaSenha.getText().toString())) {
                     final String nome = edtCadNome.getText().toString();
+                    final String telefone = edttelefone.getText().toString();
                     final String email = edtCadEmail.getText().toString();
                     final String senha = edtCadSenha.getText().toString();
                     final String sexo;
                     if (rbFeminino.isChecked()) {
                        sexo = "feminino";
                     } else {
-                        sexo = "masculino";;
+                        sexo = "masculino";
                     }
 
                     final Usuario usuario = new Usuario();
@@ -74,6 +87,7 @@ public class CadastroActivity extends AppCompatActivity {
                     usuario.setEmail(email);
                     usuario.setSenha(senha);
                     usuario.setSexo(sexo);
+                    usuario.setTelefone(telefone);
 
                     autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
                     autenticacao.createUserWithEmailAndPassword(
@@ -89,6 +103,7 @@ public class CadastroActivity extends AppCompatActivity {
                                 newusuario.put("nome", nome);
                                 newusuario.put("senha", senha);
                                 newusuario.put("sexo", sexo);
+                                newusuario.put("telefone", telefone);
 
                                 Usuario.logar(usuario);
 
@@ -132,4 +147,7 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 }

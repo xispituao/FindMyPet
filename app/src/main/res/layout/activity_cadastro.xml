@@ -23,6 +23,13 @@
                 android:hint="Nome"
                 android:inputType="text" />
 
+            <EditText
+                android:id="@+id/edtTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefone"
+                android:inputType="text" />
+
 
             <EditText
                 android:id="@+id/edtCadEmail"
@@ -44,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Confirma Senha"
                 android:inputType="textPassword" />
+
 
             <RadioGroup
                 android:id="@+id/rgSexo"
