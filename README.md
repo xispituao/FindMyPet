@@ -1,6 +1,6 @@
 # FindMyPet
 Projeto FInal 3°Periodo.
-APlicativo criado com o intuito de facilitar o porcesso de busca do pet(seja cachorro ou gato) perdido. 
+APlicativo criado com o intuito de facilitar o processo de busca do pet(seja cachorro ou gato) perdido. Usuários poderão se comunicar com o usuario do post por meio de comentários contribuindo com informações sobre o pet.
 
 
 ## Classes Modelos
