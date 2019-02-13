@@ -1,0 +1,138 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7244259002080432593",
+      "lastPropertyId": "8:3126596695783832624",
+      "name": "Animal",
+      "properties": [
+        {
+          "id": "1:3851467726820696596",
+          "name": "id"
+        },
+        {
+          "id": "2:8969545614125809596",
+          "name": "nome"
+        },
+        {
+          "id": "3:3380189092385222181",
+          "name": "especie"
+        },
+        {
+          "id": "4:467247572805301061",
+          "name": "cor_pelo"
+        },
+        {
+          "id": "5:5800426324190585950",
+          "name": "cor_olhos"
+        },
+        {
+          "id": "6:7563030660767155207",
+          "name": "raca"
+        },
+        {
+          "id": "7:4450293238548335257",
+          "name": "sexo"
+        },
+        {
+          "id": "8:3126596695783832624",
+          "name": "caracteristicasAdicionais"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:4641627934297316356",
+      "lastPropertyId": "3:1660691092349730789",
+      "name": "Comentario",
+      "properties": [
+        {
+          "id": "1:5863688908093187926",
+          "name": "id"
+        },
+        {
+          "id": "2:7060303315003409533",
+          "name": "conteudo"
+        },
+        {
+          "id": "3:1660691092349730789",
+          "indexId": "3:7041455335425169078",
+          "name": "usuarioId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:8986856013872482088",
+      "lastPropertyId": "3:2228591836338232763",
+      "name": "Publicacao",
+      "properties": [
+        {
+          "id": "1:9002732285921614343",
+          "name": "id"
+        },
+        {
+          "id": "2:5977158108210347641",
+          "indexId": "1:4500234494647556952",
+          "name": "usuarioId"
+        },
+        {
+          "id": "3:2228591836338232763",
+          "indexId": "2:8438258498905107700",
+          "name": "animalId"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:2231656859145948197",
+          "name": "comentarios"
+        }
+      ]
+    },
+    {
+      "id": "4:820655251197710019",
+      "lastPropertyId": "6:5488168836880214169",
+      "name": "Usuario",
+      "properties": [
+        {
+          "id": "1:320807612580060522",
+          "name": "id"
+        },
+        {
+          "id": "2:5595681566220766943",
+          "name": "nome"
+        },
+        {
+          "id": "3:680305353992143726",
+          "name": "email"
+        },
+        {
+          "id": "4:7654457699979311708",
+          "name": "senha"
+        },
+        {
+          "id": "5:2071592636542490464",
+          "name": "sexo"
+        },
+        {
+          "id": "6:5488168836880214169",
+          "name": "telefone"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "4:820655251197710019",
+  "lastIndexId": "3:7041455335425169078",
+  "lastRelationId": "1:2231656859145948197",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
