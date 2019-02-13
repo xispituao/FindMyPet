@@ -1,31 +1,49 @@
 package com.example.findmypet.Modelos;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToMany;
+import io.objectbox.relation.ToOne;
+
+@Entity
 public class Publicacao {
-    private Usuario usuario;
-    private Animal animal;
+    @Id
+    public long id;
+    public ToOne<Usuario> usuario;
+    public ToOne<Animal> animal;
+    public ToMany<Comentario> comentarios;
+
 
     public Publicacao() {
 
     }
-    public Publicacao(Usuario usuario, Animal animal){
+
+    public Publicacao(ToOne<Usuario> usuario, ToOne<Animal> animal) {
         this.usuario = usuario;
         this.animal = animal;
     }
 
-    public Usuario getUsuario() {
+    public ToOne<Usuario> getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(ToOne<Usuario> usuario) {
         this.usuario = usuario;
     }
 
-
-    public Animal getAnimal() {
+    public ToOne<Animal> getAnimal() {
         return animal;
     }
 
-    public void setAnimal(Animal animal) {
+    public void setAnimal(ToOne<Animal> animal) {
         this.animal = animal;
+    }
+
+    public ToMany<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(ToMany<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }

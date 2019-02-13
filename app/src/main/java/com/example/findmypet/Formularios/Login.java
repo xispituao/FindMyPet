@@ -1,7 +1,6 @@
 package com.example.findmypet.Formularios;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -12,30 +11,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.findmypet.DAO.ConfiguracaoFirebase;
+
 import com.example.findmypet.MainActivity;
 import com.example.findmypet.Modelos.Usuario;
 import com.example.findmypet.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.example.findmypet.dal.App;
+
+import java.util.List;
+
+import io.objectbox.Box;
+import io.objectbox.BoxStore;
 
 public class Login extends AppCompatActivity {
     private EditText email;
     private EditText senha;
     private Button logar;
     private TextView cadastrar;
-    private FirebaseAuth autenticacao;
-    private DocumentReference usuario;
+    private Box<Usuario> dataBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        BoxStore store = ((App) getApplication()).getBoxStore();
+        dataBox = store.boxFor(Usuario.class);
 
         email = (EditText)findViewById(R.id.email);
         senha = (EditText)findViewById(R.id.senha);
@@ -48,30 +47,26 @@ public class Login extends AppCompatActivity {
         logar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!email.getText().toString().equals("") && !senha.getText().toString().equals("")){
-                    autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-                    autenticacao.signInWithEmailAndPassword(email.getText().toString(),senha.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-                                Toast.makeText(Login.this, "Login feito com sucesso", Toast.LENGTH_SHORT).show();
-                                usuario = ConfiguracaoFirebase.BancoDeDados().collection("usuarios").document(email.getText().toString());
-                                usuario.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        Usuario usuarioLogado = documentSnapshot.toObject(Usuario.class);
-                                        Usuario.logar(usuarioLogado);
-                                        redirecionarParaTelaPrincipal();
-                                    }
-                                });
-
-                            }else {
-                                Toast.makeText(Login.this, "Email ou/e senha errados!", Toast.LENGTH_SHORT).show();
-                            }
+                String emailUsuario = email.getText().toString();
+                String senhaUsuario = senha.getText().toString();
+                if (!emailUsuario.equals("") && !senhaUsuario.equals("")){
+                    int auxiliar = 1;
+                    List<Usuario> usuarios = dataBox.getAll();
+                    for(Usuario usuario:usuarios){
+                        if(usuario.getEmail().equals(emailUsuario) && usuario.getSenha().equals(senhaUsuario)){
+                            Toast.makeText(Login.this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                            Usuario.setUsuarioLogado(usuario);
+                            auxiliar = 2;
+                            redirecionarParaTelaPrincipal();
+                            break;
                         }
-                    });
+                    }
+                    if(auxiliar == 1) {
+                        Toast.makeText(Login.this, "Usuario e/ou senha errada(s)!", Toast.LENGTH_SHORT).show();
+                    }
 
-            }}
+                }
+            }
         });
 
        cadastrar.setOnClickListener(new View.OnClickListener() {

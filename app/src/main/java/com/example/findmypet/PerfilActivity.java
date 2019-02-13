@@ -10,14 +10,7 @@ import android.widget.Toast;
 
 import com.example.findmypet.Adapters.AdapterAnimalPerdido;
 import com.example.findmypet.Adapters.AdapterPublicacoesPerfil;
-import com.example.findmypet.DAO.ConfiguracaoFirebase;
 import com.example.findmypet.Modelos.Publicacao;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -46,22 +39,5 @@ public class PerfilActivity extends AppCompatActivity {
         recyclerview.setAdapter(adapter);*/
     }
 
-    public void pegarNoBdPublicacoes() {
-        CollectionReference publicacoesReferencia = ConfiguracaoFirebase.BancoDeDados().collection("publicacoes");
-        //Query query = publicacoesReferencia.where
-        publicacoesReferencia.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Publicacao publicacao = document.toObject(Publicacao.class);
-                        publicacoes.add(publicacao);
-                    }
-                } else {
-                    Toast.makeText(PerfilActivity.this, "ERRO AO PUXAR OS DADOS DO BD PUBLICACOES", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
-    }
 }

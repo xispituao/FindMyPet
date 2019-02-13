@@ -1,6 +1,12 @@
 package com.example.findmypet.Modelos;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+
+@Entity
 public class Usuario {
+    @Id
+    public long id;
     private String nome;
     private String email;
     private String senha;
@@ -68,15 +74,11 @@ public class Usuario {
         usuarioLogado = usuariologado;
     }
 
-    public static Usuario obterOUsuarioLogado(){
-        if (usuarioLogado != null) {
-            return usuarioLogado;
-        }else {
-            return null;
-        }
+    public static void setUsuarioLogado(Usuario usuarioLogado) {
+        Usuario.usuarioLogado = usuarioLogado;
     }
 
-    public static void deslogarUsuario(){
-        usuarioLogado = null;
+    public static Usuario obterOUsuarioLogado(){
+        return usuarioLogado;
     }
 }

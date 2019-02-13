@@ -23,16 +23,16 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.example.findmypet.DAO.ConfiguracaoFirebase;
+
 import com.example.findmypet.MainActivity;
 import com.example.findmypet.Modelos.Animal;
 import com.example.findmypet.Modelos.Publicacao;
 import com.example.findmypet.Modelos.Usuario;
 import com.example.findmypet.R;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.findmypet.dal.App;
 
+import io.objectbox.Box;
+import io.objectbox.BoxStore;
 
 
 public class FormularioPost extends AppCompatActivity {
@@ -49,11 +49,15 @@ public class FormularioPost extends AppCompatActivity {
     private Button tirarFoto;
     public static final int PICK_IMAGE = 1234;
     private Uri resultUri;
+    Box<Publicacao> dataBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_post);
+        BoxStore store = ((App) getApplication()).getBoxStore();
+        dataBox = store.boxFor(Publicacao.class);
+
         nomeAnimal = (EditText)findViewById(R.id.nome_animal);
         cachorro = (RadioButton) findViewById(R.id.cachorro);
         gato = (RadioButton)findViewById(R.id.gato);
@@ -132,16 +136,14 @@ public class FormularioPost extends AppCompatActivity {
                     sexo = "Femea";
                 }
                 String caracteristicasAdicionaisAnimal = caracteristicasAdicionais.getText().toString();
+                Animal newAnimal = new Animal(nome,sexo,cor_do_Pelo,cor_dos_olhos,racaAnimal,sexo,caracteristicasAdicionaisAnimal);
+                Usuario usuarioLogado = Usuario.getUsuarioLogado();
+                Publicacao newPublicacao = new Publicacao();
+                newPublicacao.animal.setTarget(newAnimal);
+                newPublicacao.usuario.setTarget(usuarioLogado);
+                dataBox.put(newPublicacao);
+                irParaTelaPrincipal();
 
-                Publicacao publicacao = new Publicacao(Usuario.getUsuarioLogado(), new Animal(nome,sexo,cor_do_Pelo,cor_dos_olhos,racaAnimal,sexo,caracteristicasAdicionaisAnimal));
-                FirebaseFirestore bd = ConfiguracaoFirebase.BancoDeDados();
-                bd.collection("publicacoes").add(publicacao).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(FormularioPost.this, "Publicado com sucesso!", Toast.LENGTH_SHORT).show();
-                        irParaTelaPrincipal();
-                    }
-                });
 
                 break;
             case  R.id.cancelar:

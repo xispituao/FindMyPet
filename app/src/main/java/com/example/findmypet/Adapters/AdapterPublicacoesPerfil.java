@@ -17,6 +17,8 @@ import com.example.findmypet.R;
 
 import java.util.ArrayList;
 
+import io.objectbox.relation.ToOne;
+
 public class AdapterPublicacoesPerfil extends RecyclerView.Adapter<AdapterPublicacoesPerfil.AnimalPerfilViewHolder> {
     private ArrayList<Publicacao> publicacoesDados;
     private Context mContext;
@@ -36,7 +38,8 @@ public class AdapterPublicacoesPerfil extends RecyclerView.Adapter<AdapterPublic
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPublicacoesPerfil.AnimalPerfilViewHolder animalViewHolder, int i) {
-        final Animal animal = publicacoesDados.get(i).getAnimal();
+        final ToOne<Animal> animal1 = publicacoesDados.get(i).getAnimal();
+        Animal animal = animal1.getTarget();
         animalViewHolder.animalNome.setText(animal.getNome());
         animalViewHolder.animalCor.setText(animal.getCor_pelo());
         animalViewHolder.animalRaca.setText(animal.getRaca());
@@ -72,7 +75,7 @@ public class AdapterPublicacoesPerfil extends RecyclerView.Adapter<AdapterPublic
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final int posicao = getAdapterPosition();
+                    /*final int posicao = getAdapterPosition();
                     Publicacao publicacao = publicacoesDados.get(posicao);
                     Intent intent = new Intent(mContext, DetalheAnimal.class);
                     //intent.putExtra("Imagem", animal.getFoto());
@@ -83,7 +86,7 @@ public class AdapterPublicacoesPerfil extends RecyclerView.Adapter<AdapterPublic
                     intent.putExtra("Descricao", publicacao.getAnimal().getCaracteristicasAdicionais());
                     intent.putExtra("Nome_usuario", publicacao.getUsuario().getNome());
                     intent.putExtra("Email", publicacao.getUsuario().getEmail());
-                    mContext.startActivity(intent);
+                    mContext.startActivity(intent);*/
                 }
             });
 

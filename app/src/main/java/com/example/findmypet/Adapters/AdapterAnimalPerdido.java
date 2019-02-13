@@ -12,21 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.findmypet.DAO.ConfiguracaoFirebase;
+
 import com.example.findmypet.DetalheAnimal;
 import com.example.findmypet.Modelos.Animal;
 import com.example.findmypet.Modelos.Publicacao;
 import com.example.findmypet.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.objectbox.relation.ToOne;
 
 public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerdido.AnimalViewHolder> {
     private ArrayList<Publicacao> publicacoesDados;
@@ -47,7 +43,8 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int i) {
-        final Animal animal = publicacoesDados.get(i).getAnimal();
+        final ToOne<Animal> animal1 = publicacoesDados.get(i).getAnimal();
+        Animal animal = animal1.getTarget();
         animalViewHolder.animalNome.setText(animal.getNome());
         animalViewHolder.animalCor.setText(animal.getCor_pelo());
         animalViewHolder.animalRaca.setText(animal.getRaca());
@@ -90,6 +87,7 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /*
                     final int posicao = getAdapterPosition();
                     Publicacao publicacao = publicacoesDados.get(posicao);
                     Intent intent = new Intent(mContext,DetalheAnimal.class);
@@ -101,7 +99,7 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
                     intent.putExtra("Descricao", publicacao.getAnimal().getCaracteristicasAdicionais());
                     intent.putExtra("Nome_usuario", publicacao.getUsuario().getNome());
                     intent.putExtra("Email", publicacao.getUsuario().getEmail());
-                    mContext.startActivity(intent);
+                    mContext.startActivity(intent);*/
                 }
             });
 
