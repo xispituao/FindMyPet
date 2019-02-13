@@ -87,19 +87,19 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*
+
                     final int posicao = getAdapterPosition();
                     Publicacao publicacao = publicacoesDados.get(posicao);
                     Intent intent = new Intent(mContext,DetalheAnimal.class);
                     //intent.putExtra("Imagem", animal.getFoto());
-                    intent.putExtra("Nome", publicacao.getAnimal().getNome());
-                    intent.putExtra("Especie", publicacao.getAnimal().getEspecie());
-                    intent.putExtra("Raca", publicacao.getAnimal().getRaca());
-                    intent.putExtra("Cor", publicacao.getAnimal().getCor_pelo());
-                    intent.putExtra("Descricao", publicacao.getAnimal().getCaracteristicasAdicionais());
-                    intent.putExtra("Nome_usuario", publicacao.getUsuario().getNome());
-                    intent.putExtra("Email", publicacao.getUsuario().getEmail());
-                    mContext.startActivity(intent);*/
+                    intent.putExtra("Nome", publicacao.getAnimal().getTarget().getNome());
+                    intent.putExtra("Especie", publicacao.getAnimal().getTarget().getEspecie());
+                    intent.putExtra("Raca", publicacao.getAnimal().getTarget().getRaca());
+                    intent.putExtra("Cor", publicacao.getAnimal().getTarget().getCor_pelo());
+                    intent.putExtra("Descricao", publicacao.getAnimal().getTarget().getCaracteristicasAdicionais());
+                    intent.putExtra("Nome_usuario", publicacao.getUsuario().getTarget().getNome());
+                    intent.putExtra("Email", publicacao.getUsuario().getTarget().getEmail());
+                    mContext.startActivity(intent);
                 }
             });
 
