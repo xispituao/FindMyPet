@@ -47,7 +47,7 @@ O usuário ao entrar no aplicativo tem a capacidade de criar suas listas de jogo
 ## Persistência de dados
 Object Box.
 ## Diagrama de Classe simplificado
-![](diagram3.png	)
+[alt text](https://github.com/xispituao/Imagens/blob/master/FindMyPet.png)
 ## Funcionalidades
 - Cadastro e login de usuários;
 - Criar, apagar publicção do animal perdido;
