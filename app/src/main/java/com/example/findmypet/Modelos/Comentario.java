@@ -14,6 +14,7 @@ public class Comentario {
     public Comentario() {
     }
 
+
     public ToOne<Usuario> getUsuario() {
         return usuario;
     }

@@ -90,15 +90,18 @@ public class AdapterAnimalPerdido extends RecyclerView.Adapter<AdapterAnimalPerd
 
                     final int posicao = getAdapterPosition();
                     Publicacao publicacao = publicacoesDados.get(posicao);
+
                     Intent intent = new Intent(mContext,DetalheAnimal.class);
                     //intent.putExtra("Imagem", animal.getFoto());
                     intent.putExtra("Nome", publicacao.getAnimal().getTarget().getNome());
                     intent.putExtra("Especie", publicacao.getAnimal().getTarget().getEspecie());
                     intent.putExtra("Raca", publicacao.getAnimal().getTarget().getRaca());
-                    intent.putExtra("Cor", publicacao.getAnimal().getTarget().getCor_pelo());
+                    intent.putExtra("Cor_pelo", publicacao.getAnimal().getTarget().getCor_pelo());
+                    intent.putExtra("Cor_olhos", publicacao.getAnimal().getTarget().getCor_olhos());
                     intent.putExtra("Descricao", publicacao.getAnimal().getTarget().getCaracteristicasAdicionais());
                     intent.putExtra("Nome_usuario", publicacao.getUsuario().getTarget().getNome());
                     intent.putExtra("Email", publicacao.getUsuario().getTarget().getEmail());
+                    intent.putExtra("IdPublicacao", publicacao.id);
                     mContext.startActivity(intent);
                 }
             });

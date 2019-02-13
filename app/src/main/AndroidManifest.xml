@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.findmypet">
 
-    <uses-feature android:name="android.hardware.CAMERA" android:required="false" />
-    <uses-permission android:name="android.hardware.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-feature
+        android:name="android.hardware.CAMERA"
+        android:required="false" />
 
+    <uses-permission android:name="android.hardware.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".dal.App"
@@ -17,11 +19,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".PerfilActivity"/>
+        <activity android:name=".AdicionarComentarioActivity"></activity>
+        <activity android:name=".PerfilActivity" />
         <activity android:name=".Formularios.CadastroActivity" />
-        <activity android:name=".Formularios.Login"
+        <activity
+            android:name=".Formularios.Login"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".Formularios.FormularioPost"
+        <activity
+            android:name=".Formularios.FormularioPost"
             tools:ignore="InnerclassSeparator" />
         <activity android:name=".DetalheAnimal" />
         <activity

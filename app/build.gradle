@@ -33,5 +33,3 @@ dependencies {
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
 
 }
-
-

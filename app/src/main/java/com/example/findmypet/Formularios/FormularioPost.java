@@ -1,16 +1,8 @@
 package com.example.findmypet.Formularios;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 
 import com.example.findmypet.MainActivity;
@@ -49,14 +40,16 @@ public class FormularioPost extends AppCompatActivity {
     private Button tirarFoto;
     public static final int PICK_IMAGE = 1234;
     private Uri resultUri;
-    Box<Publicacao> dataBox;
+    Box<Publicacao> dataBoxPublicacao;
+    Box<Animal> dataBoxAnimal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_post);
         BoxStore store = ((App) getApplication()).getBoxStore();
-        dataBox = store.boxFor(Publicacao.class);
+        dataBoxPublicacao = store.boxFor(Publicacao.class);
+        dataBoxAnimal = store.boxFor(Animal.class);
 
         nomeAnimal = (EditText)findViewById(R.id.nome_animal);
         cachorro = (RadioButton) findViewById(R.id.cachorro);
@@ -67,7 +60,6 @@ public class FormularioPost extends AppCompatActivity {
         corPelo = (EditText)findViewById(R.id.cor_pelo_animal);
         corOlhos = (EditText)findViewById(R.id.cor_olhos_animal);
         icone_animal = (ImageView)findViewById(R.id.icone_animal);
-        imagemAnimal = (ImageView)findViewById(R.id.imagemAnimal);
         tirarFoto = (Button) findViewById(R.id.tirarFoto);
 
         caracteristicasAdicionais = (EditText)findViewById(R.id.teste);
@@ -141,7 +133,8 @@ public class FormularioPost extends AppCompatActivity {
                 Publicacao newPublicacao = new Publicacao();
                 newPublicacao.animal.setTarget(newAnimal);
                 newPublicacao.usuario.setTarget(usuarioLogado);
-                dataBox.put(newPublicacao);
+                dataBoxAnimal.put(newAnimal);
+                dataBoxPublicacao.put(newPublicacao);
                 irParaTelaPrincipal();
 
 
