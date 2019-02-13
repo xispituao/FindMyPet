@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.findmypet.Adapters.AdapterAnimalPerdido;
 
 import com.example.findmypet.Formularios.FormularioPost;
+import com.example.findmypet.Formularios.Login;
 import com.example.findmypet.Modelos.Animal;
 import com.example.findmypet.Modelos.Publicacao;
 import com.example.findmypet.Modelos.Usuario;
@@ -73,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     abrirTelaDePerfil();
                 }else if(id == R.id.criarPublicao){
                     abrirTelaDeFormularioDePublicacao();
-                } else if(id == R.id.teste3){
-                    Toast.makeText(MainActivity.this, "TESTE3!",Toast.LENGTH_SHORT).show();
+                } else if(id == R.id.deslogar){
+                    deslogar();
                 }
                 return true;
             }
@@ -110,9 +111,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void pegarNoBdPublicacoes() {
+    private void pegarNoBdPublicacoes() {
         List<Publicacao> publicacoesBox = dataBox.getAll();
         publicacoes.addAll(publicacoesBox);
+    }
+
+    private void deslogar(){
+        Usuario.setUsuarioLogado(null);
+        Intent intent = new Intent(MainActivity.this, Login.class);
+        startActivity(intent);
+        finish();
     }
 
 

@@ -55,24 +55,17 @@
                 android:layout_toRightOf="@+id/animal_photo"
                 android:text="Cor" />
 
-            <Button
-                android:id="@+id/editarpublicao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cor"
-                android:layout_toEndOf="@+id/animal_photo"
-                android:layout_toRightOf="@+id/animal_photo"
-                android:background="#0000FF"
-                android:text="Editar" />
 
             <Button
                 android:id="@+id/apagarpublicacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_below="@+id/cor"
-                android:layout_toEndOf="@+id/editarpublicao"
-                android:layout_toRightOf="@+id/editarpublicao"
+                android:layout_marginStart="39dp"
+                android:layout_marginLeft="39dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@+id/cor"
+                android:layout_toRightOf="@+id/cor"
                 android:background="#FF0000"
                 android:text="Apagar" />
 

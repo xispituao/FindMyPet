@@ -11,8 +11,8 @@
         android:icon="@drawable/ic_format_align_justify_black_24dp" />
 
     <item
-        android:id="@+id/teste3"
-        android:title="Teste3"
-        android:icon="@drawable/ic_forum_black_24dp" />
+        android:id="@+id/deslogar"
+        android:title="Deslogar"
+        android:icon="@drawable/ic_close_black_24dp" />
 
 </menu>
